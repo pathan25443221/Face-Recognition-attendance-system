@@ -1,9 +1,12 @@
+import os
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 from tkinter import messagebox
 import psycopg2
 import cv2
+from dotenv import load_dotenv
+
 
 class Student:
 
@@ -314,11 +317,11 @@ class Student:
         else:
             try:
                 conn = psycopg2.connect(
-                    host = "localhost",
-                    port = "5432",
-                    database="face_recognizer",
-                    user="postgres",
-                    password="1234"
+                    host=os.getenv("DB_HOST"),
+                    port=os.getenv("DB_PORT"),
+                    database=os.getenv("DB_NAME"),
+                    user=os.getenv("db_user"),
+                    password=os.getenv("DB_PASSWORD")
                 )
                 my_cursor = conn.cursor()
 
@@ -349,11 +352,11 @@ class Student:
 #=====================================Fetch Data================================#
     def fetch_data(self):
         conn = psycopg2.connect(
-            host="localhost",
-            port="5432",
-            database="face_recognizer",
-            user="postgres",
-            password="1234"
+            host=os.getenv("DB_HOST"),
+            port=os.getenv("DB_PORT"),
+            database=os.getenv("DB_NAME"),
+            user=os.getenv("db_user"),
+            password=os.getenv("DB_PASSWORD")
         )
         my_cursor = conn.cursor()
         my_cursor.execute("select * from student")
@@ -399,11 +402,11 @@ class Student:
                 Update=messagebox.askyesno("Update",message="Do you want to update this student details",parent=self.root)
                 if Update>0:
                     conn = psycopg2.connect(
-                        host="localhost",
-                        port="5432",
-                        database="face_recognizer",
-                        user="postgres",
-                        password="1234"
+                        host=os.getenv("DB_HOST"),
+                        port=os.getenv("DB_PORT"),
+                        database=os.getenv("DB_NAME"),
+                        user=os.getenv("db_user"),
+                        password=os.getenv("DB_PASSWORD")
                     )
                     my_cursor = conn.cursor()
                     my_cursor.execute(
@@ -448,11 +451,11 @@ class Student:
                 delete=messagebox.askyesno("Student Delete Page",message="Do you want to delete this student",parent=self.root)
                 if delete > 0 :
                     conn = psycopg2.connect(
-                        host="localhost",
-                        port="5432",
-                        database="face_recognizer",
-                        user="postgres",
-                        password="1234"
+                        host=os.getenv("DB_HOST"),
+                        port=os.getenv("DB_PORT"),
+                        database=os.getenv("DB_NAME"),
+                        user=os.getenv("db_user"),
+                        password=os.getenv("DB_PASSWORD")
                     )
                     my_cursor = conn.cursor()
                     sql = 'delete from student where "Student_ID"=%s'
@@ -494,11 +497,11 @@ class Student:
             try:
 
                 conn = psycopg2.connect(
-                        host="localhost",
-                        port="5432",
-                        database="face_recognizer",
-                        user="postgres",
-                        password="1234"
+                    host=os.getenv("DB_HOST"),
+                    port=os.getenv("DB_PORT"),
+                    database=os.getenv("DB_NAME"),
+                    user=os.getenv("db_user"),
+                    password=os.getenv("DB_PASSWORD")
                     )
                 my_cursor = conn.cursor()
                 my_cursor.execute("select * from student")
@@ -569,11 +572,11 @@ class Student:
             return
         try:
             conn = psycopg2.connect(
-                host="localhost",
-                port="5432",
-                database="face_recognizer",
-                user="postgres",
-                password="1234"
+                host=os.getenv("DB_HOST"),
+                port=os.getenv("DB_PORT"),
+                database=os.getenv("DB_NAME"),
+                user=os.getenv("db_user"),
+                password=os.getenv("DB_PASSWORD")
             )
             my_cursor = conn.cursor()
 
